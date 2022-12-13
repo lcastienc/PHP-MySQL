@@ -1,0 +1,14 @@
+create database products;
+use products;
+
+create table products(
+  id int auto_increment primary key,
+  Name varchar(50),
+  Description varchar(50),
+  Price int
+);
+
+INSERT INTO products(Name, Description,Price) VALUES
+('Iphone 11','Smartphone 5G','899'),
+('OPPO','Smartphone 5G','799'),
+('Huawei p40','Smartphone 5G','499');
