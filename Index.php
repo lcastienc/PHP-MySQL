@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>PHP + MySQL</title>
@@ -17,20 +16,26 @@
 </head>
 
 <?php
-
-$db_host = "localhost";
-$db_nombre = "products";
-$db_usuario = "root";
-$db_passwd = "";
-$connexio = mysqli_connect($db_host, $db_usuario, $db_passwd, $db_nombre);
+include 'connection_db.php';
 $consulta = "SELECT * FROM PRODUCTS";
 
-$products = mysqli_query($connexio, $consulta);
+$products = mysqli_query($connection, $consulta);
 
 ?>
 <body>
+
+<div class="container-fluid bg-warning">
+    <div class="row">
+        <div class="col-md">
+            <header class="py-3">
+                <h3 class="text-center">CRUD PHP + MySQL</h3>
+            </header>
+        </div>
+    </div>
+</div>
+
 <div class="card-header">
-    Lista de productos
+    <strong> List of Products</strong>
 </div>
 <table class="table">
     <thead>
@@ -50,7 +55,7 @@ $products = mysqli_query($connexio, $consulta);
             <td><?php echo $product['Description'] ?></td>
             <td><?php echo $product['Price'] ?></td>
             <td >
-                <a href="form_editproduct.php?id=<?php echo $product['id'] ?>">
+                <a href="formedit_product.php?id=<?php echo $product['id'] ?>">
                     <button type="button" class="btn btn-outline-primary">Edit</button>
                 </a>
                 <a href="delete_product.php?id=<?php echo $product['id'] ?>">
@@ -65,7 +70,7 @@ $products = mysqli_query($connexio, $consulta);
 
 
 <div class="card-header">
-    Ingresar datos del nuevo producto:
+    <strong>Enter data of the new product:</strong>
 </div>
 
 <form class="p-4" method="POST" action="add_product.php">
@@ -83,8 +88,9 @@ $products = mysqli_query($connexio, $consulta);
     </div>
     <div class="d-grid">
         <input type="hidden" name="oculto" value="1">
-        <input type="submit" class="btn btn-primary" value="Registrar">
+        <input type="submit" class="btn btn-primary" value="Add Product">
     </div>
 </form>
 </body>
 </html>
+<?php include 'html_Beautifier/footer.php' ?>
